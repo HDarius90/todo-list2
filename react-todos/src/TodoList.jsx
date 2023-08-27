@@ -1,6 +1,7 @@
 import { useState } from "react";
 import List from '@mui/material/List';
 import TodoItem from "./TodoItem";
+import TodoForm from "./TodoForm";
 
 const initialTodos = [
     { id: 1, text: "take the dog fow a walk", complete: true },
@@ -35,6 +36,12 @@ export default function TodoList() {
         })
     }
 
+    const addTodo = (text) => {
+        setTodos(prevTodos => {
+            return [...prevTodos, { id: false, text: text, complete: false }]
+        });
+    };
+
 
     return (
 
@@ -47,6 +54,7 @@ export default function TodoList() {
                     toggle={() => toggleTodo(todo.id)}
                 />
             ))}
+            <TodoForm addTodo={addTodo}/>
         </List>
 
     );
