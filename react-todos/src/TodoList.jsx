@@ -23,12 +23,29 @@ export default function TodoList() {
         });
     };
 
+    const toggleTodo = (id) => {
+        setTodos(prevTodos => {
+            return prevTodos.map((todo) => {
+                if (todo.id === id) {
+                    return { ...todo, complete: !todo.complete }
+                } else {
+                    return todo
+                }
+            })
+        })
+    }
+
 
     return (
 
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             {todos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} remove={removeTodo} />
+                <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    remove={removeTodo}
+                    toggle={() => toggleTodo(todo.id)}
+                />
             ))}
         </List>
 
